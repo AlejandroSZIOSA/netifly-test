@@ -1,8 +1,16 @@
-exports.handler = async (event, context) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: "Hello from Netlify API 🚀",
-    }),
-  };
-};
+const express = require("express");
+const serverless = require("serverless-http");
+
+const app = express();
+
+app.use(express.json());
+
+app.get("/hello", (req, res) => {
+  res.json({ message: "Hello from Express on Netlify 🚀" });
+});
+
+app.post("/user", (req, res) => {
+  res.json({ received: req.body });
+});
+
+module.exports.handler = serverless(app);

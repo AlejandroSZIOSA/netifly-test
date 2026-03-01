@@ -13,4 +13,6 @@ app.post("/user", (req, res) => {
   res.json({ received: req.body });
 });
 
-module.exports.handler = serverless(app);
+module.exports.handler = serverless(app, {
+  basePath: "/api",
+});
